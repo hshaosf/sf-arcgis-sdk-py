@@ -2,7 +2,7 @@
 import json
 import falcon
 import jsend
-from boilerplate_sdk.example import Example
+from boilerplate_sdk.sdk import SDK
 
 def run():
     """ run function"""
@@ -13,14 +13,14 @@ def run():
 
 class Page():
     """ Page class """
-    example = None
+    sdk = None
 
     def on_get(self, _req, _resp, name):
         """ on page GET requests """
         dispatch = None
         if hasattr(self.__class__, name) and callable(getattr(self.__class__, name)):
             dispatch = getattr(self, name)
-            self.example = Example()
+            self.sdk = SDK()
         else:
             dispatch = self.default_page
         dispatch(_req, _resp)
@@ -41,6 +41,6 @@ class Page():
 
     def get_posts(self, _req, resp):
         """ example get_posts response """
-        responses = self.example.get_posts({'userId':'1'})
+        responses = self.sdk.get_posts({'userId':'1'})
         resp.status = falcon.HTTP_200
         resp.body = json.dumps(responses)
