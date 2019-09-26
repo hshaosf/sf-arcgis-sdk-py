@@ -6,7 +6,7 @@ verify_ssl = true
 [dev-packages]
 pylint = "*"
 pdoc3 = "*"
-sphinx = "*"
+sphinx = "< 2"
 
 [packages]
 falcon = "*"
